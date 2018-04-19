@@ -38,10 +38,10 @@ public class Apartment {
     private String created;
 
     @JsonProperty("KoordinatLongitud")
-    private Double longitude;
+    private double longitude;
 
     @JsonProperty("KoordinatLatitud")
-    private Double latitude;
+    private double latitude;
 
     @JsonProperty("Url")
     private String url;
