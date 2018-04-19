@@ -42,7 +42,7 @@ public class ApartmentJob {
 
         if (newAndOfInterest.size() > 0) {
             log.info(String.format("%d of the apartments are new!", newAndOfInterest.size()));
-            publisher.publishEvent(new NewApartmentsEvent(apartments));
+            publisher.publishEvent(new NewApartmentsEvent(newAndOfInterest));
         } else {
             log.info("None of the apartments are new.");
         }
