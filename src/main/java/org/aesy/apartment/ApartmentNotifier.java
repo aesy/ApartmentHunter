@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,7 @@ public class ApartmentNotifier {
         this.templateEngine = templateEngine;
     }
 
+    @Order(0)
     @EventListener
     public void notifyNewApartments(NewApartmentsEvent event) {
         List<Apartment> apartments = event.getApartments();
