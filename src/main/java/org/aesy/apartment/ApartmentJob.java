@@ -29,7 +29,7 @@ public class ApartmentJob {
         this.matchingApartmentFilter = matchingApartmentFilter;
     }
 
-    @Scheduled(fixedRate = 60 * 1000)
+    @Scheduled(fixedRateString = "${apartment.check.interval}")
     public void checkForNewApartments() {
         log.info("Checking for new apartments...");
 
