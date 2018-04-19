@@ -1,5 +1,7 @@
 # ApartmentHunter
 
+Notifies when new apartments show up on bostad.stockholm.se that match your description
+
 ## Usage
 
 ### Prerequisites
