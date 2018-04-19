@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<body>
+		<h2>New apartments found!</h2>
+
+		<!--/*@thymesVar id="apartments" type="java.util.List<org.aesy.apartment.Apartment>"*/-->
+		<div th:each="apartment : ${apartments}">
+			<a th:href="${'https://maps.google.com/?q=' + apartment.address}">
+				<h3 th:text="${apartment.district + ' - ' + apartment.address + ' (' + apartment.count + ')'}"></h3>
+			</a>
+
+			<div>Area: <span th:text="${apartment.area}"></span> m&#xb2;</div>
+			<div>Rent: <span th:text="${apartment.rent}"></span> sek</div>
+
+			<a th:href="${'https://bostad.stockholm.se' + apartment.url}">
+				Check the details!
+			</a>
+		</div>
+	</body>
+</html>
