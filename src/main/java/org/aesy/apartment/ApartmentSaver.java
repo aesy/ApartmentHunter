@@ -18,7 +18,7 @@ public class ApartmentSaver {
     }
 
     @EventListener
-    public void notifyNewApartments(NewApartmentsEvent event) {
+    public void saveNewApartments(NewApartmentsEvent event) {
         List<Apartment> apartments = event.getApartments();
 
         apartmentRepository.saveAll(apartments);
