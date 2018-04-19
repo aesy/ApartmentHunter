@@ -31,7 +31,7 @@ public class ApartmentService {
         HttpStatus statusCode = response.getStatusCode();
 
         if (!statusCode.is2xxSuccessful()) {
-            log.warning(String.format("Failed to get available apartments. Status code: %d", statusCode.value()));
+            log.warning(String.format("Failed to get available apartments. Status code: %d.", statusCode.value()));
 
             return new ArrayList<>();
         }

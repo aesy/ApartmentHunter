@@ -76,7 +76,7 @@ public class ApartmentNotifier {
 
             mailSender.send(message);
         } catch (MessagingException exception) {
-            log.warning(String.format("Failed to send email. Error: %s", exception.getMessage()));
+            log.warning(String.format("Failed to send email. Error: '%s'.", exception.getMessage()));
         }
     }
 }

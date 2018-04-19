@@ -34,14 +34,17 @@ public class ApartmentJob {
         log.info("Checking for new apartments...");
 
         List<Apartment> apartments = apartmentService.getAvailableApartments();
-        apartments = newApartmentFilter.filter(apartments);
-        apartments = matchingApartmentFilter.filter(apartments);
+        List<Apartment> ofInterest = matchingApartmentFilter.filter(apartments);
+        List<Apartment> newAndOfInterest = newApartmentFilter.filter(ofInterest);
 
-        if (apartments.size() > 0) {
-            log.info(String.format("New apartment(s) found! Count: %d", apartments.size()));
+        log.info(String.format("There are currently %d apartments available. %d are of interest.",
+                               apartments.size(), ofInterest.size()));
+
+        if (newAndOfInterest.size() > 0) {
+            log.info(String.format("%d of the apartments are new!", newAndOfInterest.size()));
             publisher.publishEvent(new NewApartmentsEvent(apartments));
         } else {
-            log.info("No new apartments found at this time");
+            log.info("None of the apartments are new.");
         }
     }
 }
