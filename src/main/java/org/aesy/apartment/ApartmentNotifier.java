@@ -18,6 +18,8 @@ import java.util.List;
 @Log
 @Component
 public class ApartmentNotifier {
+    private final static String EMAIL_TEMPLATE_NAME = "newApartmentsEmailTemplate";
+
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
 
@@ -44,7 +46,7 @@ public class ApartmentNotifier {
                                                              StandardCharsets.UTF_8.name());
             Context context = new Context();
             context.setVariable("apartments", apartments);
-            String html = templateEngine.process("new_apartments", context);
+            String html = templateEngine.process(EMAIL_TEMPLATE_NAME, context);
 
             helper.setTo(reciever);
             helper.setSubject(subject);
