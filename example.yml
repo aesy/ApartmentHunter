@@ -1,33 +1,35 @@
-# rename and edit to your liking
+# Rename and edit to your liking.
+# All values except requirements are mandatory, but at least one requirement should be provided. 
+
 apartment:
     hunter:
       - check:
-            cron:
-        email:
-        match:
-            shortTime:
-            student:
-            youth:
-            senior:
-            regular:
-            balcony:
-            lift:
-            newlyProduced:
-            quick:
-            type:
-            minRent:
-            maxRent:
-            minRooms:
-            maxRooms:
-            minArea:
-            maxArea:
+            cron: # cron expression as a string
+        email: # string
+        requirements:
+            shortTime: # boolean
+            student: # boolean
+            youth: # boolean
+            senior: # boolean
+            regular: # boolean
+            balcony: # boolean
+            lift: # boolean
+            newlyProduced: # boolean
+            quick: # boolean
+            type: # string
+            minRent: # integer
+            maxRent: # integer
+            minRooms: # integer
+            maxRooms: # integer
+            minArea: # integer
+            maxArea: # integer
             districts:
-              -
+              - # string
             municipalities:
-              -
+              - # string
 
 spring.mail:
-    host:
-    port:
-    username:
-    password:
+    host: # string
+    port: # integer
+    username: # string
+    password: # string
