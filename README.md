@@ -16,13 +16,3 @@ Notifies when new apartments show up on bostad.stockholm.se that match your desc
 * Run it with your configuration file: `java -jar ApartmentHunter.jar -Dspring.config.location=file:config.yml` 
  
 Now emails will be sent when new apartments match your description. Automation, hurray!
-
-## Build
-
-### Prerequisites
-
-* Install Maven
-
-### Run
-
-Run maven command in project root directory: `mvn spring-boot:run -Dspring.config.location=file:config.yml`.
