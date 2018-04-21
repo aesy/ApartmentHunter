@@ -7,7 +7,7 @@ Notifies when new apartments show up on bostad.stockholm.se that match your desc
 ### Prerequisites
 
 * Install Java 8
-* Install MongoDB and set up to run on port 27017 (default)
+* Install MongoDB
 * Create a configuration file `config.yml`. See `example.yml`.
 
 ### Run

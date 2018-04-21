@@ -33,3 +33,7 @@ spring.mail:
     port: # integer
     username: # string
     password: # string
+
+spring.data.mongodb:
+    host: # string
+    port: # integer
