@@ -1,4 +1,4 @@
-# rename to application.yml and edit to your liking
+# rename and edit to your liking
 apartment:
     hunter:
       - check:

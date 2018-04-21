@@ -35,7 +35,6 @@ public class ApartmentJob {
         log.info(String.format("Checking for new apartments for hunter '%s'", hunter.getEmail()));
 
         List<Apartment> apartments = apartmentService.getAvailableApartments();
-        ApartmentHunter.Requirements requirements = hunter.getRequirements();
         List<Apartment> ofInterest = matchFilter.filter(hunter, apartments);
         List<Apartment> newAndOfInterest = newFilter.filter(hunter, ofInterest);
 
