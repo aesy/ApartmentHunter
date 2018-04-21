@@ -21,8 +21,13 @@ public class ApartmentSaver {
     @Order(1)
     @EventListener
     public void saveNewApartments(NewApartmentsEvent event) {
+        ApartmentHunter hunter = event.getHunter();
         List<Apartment> apartments = event.getApartments();
 
-        apartmentRepository.saveAll(apartments);
+        for (Apartment apartment : apartments) {
+            SeenApartment seenApartment = new SeenApartment(hunter, apartment);
+
+            apartmentRepository.save(seenApartment);
+        }
     }
 }

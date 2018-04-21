@@ -39,7 +39,7 @@ public class ApartmentService {
         return Arrays.asList(response.getBody());
     }
 
-    public boolean isSeen(Apartment apartment) {
-        return apartmentRepository.existsById(apartment.getId());
+    public boolean hasSeen(ApartmentHunter hunter, Apartment apartment) {
+        return apartmentRepository.existsByEmailAndApartmentId(hunter.getEmail(), apartment.getId());
     }
 }

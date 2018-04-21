@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class NewApartmentFilter implements Filter<List<Apartment>> {
+public class NewApartmentFilter {
     private final ApartmentService apartmentService;
 
     @Autowired
@@ -15,10 +15,9 @@ public class NewApartmentFilter implements Filter<List<Apartment>> {
         this.apartmentService = apartmentService;
     }
 
-    @Override
-    public List<Apartment> filter(List<Apartment> apartments) {
+    public List<Apartment> filter(ApartmentHunter hunter, List<Apartment> apartments) {
         return apartments.stream()
-            .filter(apartment -> !apartmentService.isSeen(apartment))
+            .filter(apartment -> !apartmentService.hasSeen(hunter, apartment))
             .collect(Collectors.toList());
     }
 }

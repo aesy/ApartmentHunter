@@ -3,7 +3,6 @@ package org.aesy.apartment;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,36 +12,40 @@ import java.util.List;
 public class ApartmentJob {
     private final ApplicationEventPublisher publisher;
     private final ApartmentService apartmentService;
-    private final Filter<List<Apartment>> newApartmentFilter;
-    private final Filter<List<Apartment>> matchingApartmentFilter;
+    private final ApartmentProperties properties;
+    private final NewApartmentFilter newFilter;
+    private final MatchingApartmentFilter matchFilter;
 
     @Autowired
     public ApartmentJob(
         ApplicationEventPublisher publisher,
+        ApartmentProperties properties,
         ApartmentService apartmentService,
-        NewApartmentFilter newApartmentFilter,
-        MatchingApartmentFilter matchingApartmentFilter
+        NewApartmentFilter newFilter,
+        MatchingApartmentFilter matchFilter
     ) {
         this.publisher = publisher;
+        this.properties = properties;
         this.apartmentService = apartmentService;
-        this.newApartmentFilter = newApartmentFilter;
-        this.matchingApartmentFilter = matchingApartmentFilter;
+        this.newFilter = newFilter;
+        this.matchFilter = matchFilter;
     }
 
-    @Scheduled(fixedRateString = "${apartment.check.interval}")
-    public void checkForNewApartments() {
-        log.info("Checking for new apartments...");
+    public void checkForNewApartments(ApartmentHunter hunter) {
+        log.info(String.format("Checking for new apartments for hunter '%s'", hunter.getEmail()));
 
         List<Apartment> apartments = apartmentService.getAvailableApartments();
-        List<Apartment> ofInterest = matchingApartmentFilter.filter(apartments);
-        List<Apartment> newAndOfInterest = newApartmentFilter.filter(ofInterest);
+        ApartmentHunter.Requirements requirements = hunter.getRequirements();
+        List<Apartment> ofInterest = matchFilter.filter(hunter, apartments);
+        List<Apartment> newAndOfInterest = newFilter.filter(hunter, ofInterest);
 
-        log.info(String.format("There are currently %d apartments available. %d are of interest.",
-                               apartments.size(), ofInterest.size()));
+        log.info(String.format("There are currently %d apartments available.", apartments.size()));
+        log.info(String.format("%d of the apartments are of interest.", ofInterest.size()));
 
         if (newAndOfInterest.size() > 0) {
             log.info(String.format("%d of the apartments are new!", newAndOfInterest.size()));
-            publisher.publishEvent(new NewApartmentsEvent(newAndOfInterest));
+
+            publisher.publishEvent(new NewApartmentsEvent(hunter, newAndOfInterest));
         } else {
             log.info("None of the apartments are new.");
         }

@@ -4,5 +4,4 @@ out
 target
 build
 
-application.properties
-MatchingApartmentFilter.java
+application.yml

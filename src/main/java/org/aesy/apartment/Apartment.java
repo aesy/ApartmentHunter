@@ -2,11 +2,9 @@ package org.aesy.apartment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
 
 @Getter
 public class Apartment {
-    @Id
     @JsonProperty("AnnonsId")
     private int id;
 

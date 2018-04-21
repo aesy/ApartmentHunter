@@ -1,6 +1,6 @@
 # ApartmentHunter
 
-Notifies when new apartments show up on bostad.stockholm.se that match your description
+Notifies when new apartments show up on bostad.stockholm.se that requirements your description.
 
 ## Usage
 
@@ -9,8 +9,7 @@ Notifies when new apartments show up on bostad.stockholm.se that match your desc
 * Install Java 8
 * Install Maven
 * Setup MongoDB to run on port 27017
-* Create a configuration file at `src/main/application.properties`. See `example.properties`.
-* Create a class that filters apartments to your preferences. Rename `MatchingApartmentFilterExample` to `MatchingApartmentFilter` and edit to your liking.
+* Create a configuration file at `src/main/application.yml`. See `example.yml`.
 
 ### Run
 
