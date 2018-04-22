@@ -9,8 +9,9 @@ import java.util.List;
 public class ApartmentHunter {
     @Data
     public static class Check {
-        @NotNull
         private String cron;
+        private Integer interval;
+        private Boolean startup;
     }
 
     @Data

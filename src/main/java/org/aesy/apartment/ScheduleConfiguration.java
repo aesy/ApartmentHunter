@@ -5,8 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.scheduling.support.PeriodicTrigger;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class ScheduleConfiguration {
@@ -28,9 +30,28 @@ public class ScheduleConfiguration {
 
         for (ApartmentHunter hunter : hunters) {
             String cron = hunter.getCheck().getCron();
-            scheduler.schedule(() -> {
+            Integer interval = hunter.getCheck().getInterval();
+            Boolean startup = hunter.getCheck().getStartup();
+
+            if (cron != null) {
+                scheduler.schedule(() -> {
+                    apartmentJob.checkForNewApartments(hunter);
+                }, new CronTrigger(cron));
+            }
+
+            if (interval != null) {
+                scheduler.schedule(() -> {
+                    apartmentJob.checkForNewApartments(hunter);
+                }, new PeriodicTrigger(interval, TimeUnit.SECONDS));
+            }
+
+            if (cron == null && interval == null) {
+                throw new IllegalArgumentException("CRON expression or interval must be provided");
+            }
+
+            if (startup != null) {
                 apartmentJob.checkForNewApartments(hunter);
-            }, new CronTrigger(cron));
+            }
         }
     }
 }

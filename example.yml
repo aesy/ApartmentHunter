@@ -1,12 +1,13 @@
 # Rename and edit to your liking.
-# All values except requirements are mandatory, but at least one requirement should be provided. 
 
 apartment:
     hunter:
-      - check:
-            cron: # cron expression as a string
+      - check: # either one or both interval and cron should be provided
+            startup: # boolean optional
+            interval: # integer seconds
+            cron: # string cron expression
         email: # string
-        requirements:
+        requirements: # at least one requirement should be provided
             shortTime: # boolean
             student: # boolean
             youth: # boolean
