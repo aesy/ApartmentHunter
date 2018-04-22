@@ -49,7 +49,7 @@ public class ScheduleConfiguration {
                 throw new IllegalArgumentException("CRON expression or interval must be provided");
             }
 
-            if (startup != null) {
+            if (startup) {
                 apartmentJob.checkForNewApartments(hunter);
             }
         }
