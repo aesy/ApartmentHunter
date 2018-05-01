@@ -2,6 +2,7 @@ package org.aesy.apartment;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +20,9 @@ import java.util.List;
 @Component
 public class ApartmentNotifier {
     private final static String EMAIL_TEMPLATE_NAME = "newApartmentsEmailTemplate";
+
+    @Value("${spring.mail.username}")
+    private String from;
 
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
@@ -48,6 +52,7 @@ public class ApartmentNotifier {
             context.setVariable("apartments", apartments);
             String html = templateEngine.process(EMAIL_TEMPLATE_NAME, context);
 
+            helper.setFrom(from);
             helper.setTo(reciever);
             helper.setSubject(subject);
             helper.setText(html, true);
