@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    apartment:
+        container_name: apartment
+        image: apartment:latest
+        links:
+            - mongodb
+        depends_on:
+            - mongodb
+    mongodb:
+        container_name: mongodb
+        image: mongo:latest
+        environment:
+          - MONGO_DATA_DIR=/data/db
+        volumes:
+          - mongo_data:/data/db
+
+volumes:
+  mongo_data:
